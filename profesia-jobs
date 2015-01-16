@@ -1,0 +1,142 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+use 5.010;
+use autodie;
+use Getopt::Long;
+use Pod::Usage;
+use Mojo::UserAgent;
+use Time::Piece;
+
+#################
+# Configuration #
+#################
+
+# Command line options
+my $help = 0;
+my $man  = 0;
+my $count;
+GetOptions(
+    "help|h|?" => \$help,
+    man        => \$man,
+    count      => \$count,
+) or pod2usage(2);
+
+# Help
+pod2usage(1) if $help;
+pod2usage( -exitval => 0, -verbose => 2, -noperldoc => 1 ) if $man;
+
+########
+# Main #
+########
+
+my @search_terms = @ARGV;
+
+my $t = localtime;
+my $DATE = sprintf "%4d%02d%02d", $t->year, $t->mon, $t->mday;
+
+for my $search (@search_terms) {
+    my $n_pages = pages($search);
+    my $offers = search_pages( $search, $n_pages );
+    if ($count) {
+        say join( ';', $DATE, $search, scalar @$offers );
+    } else {
+        binmode STDOUT, ":encoding(UTF-8)";
+        say for @$offers;
+    }
+}
+
+#############
+# Functions #
+#############
+
+# Search and return pages for offers containing $search term.
+sub search_pages {
+    my $search  = shift;
+    my $n_pages = shift;
+
+    my @offers;
+
+    my $ua = Mojo::UserAgent->new;
+    for my $page ( 1 .. $n_pages ) {
+        my $url =
+          "http://www.profesia.sk/search.php?search_anywhere=$search&tab_name=offer&page_num=$page";
+        my $dom = $ua->get($url)->res->dom;
+
+        for my $e ( $dom->find('a[class="title"]')->each ) {
+
+            # skip unrelated latest offers in the bottom;
+            next unless $e->{id} =~ /^offer\d+$/;
+
+            my ($employer) =
+              $e->{href} =~
+              /^\/praca\/([^\/]+)\//;    # /praca/advantage-consulting/O1959847
+            my $job_title = $e->text;
+            my ($job_id) = $e->{id} =~ /(\d+)/;    # offer1959847
+
+            push @offers,
+              join( ';', $DATE, $search, $job_id, $employer, $job_title );
+        }
+    }
+
+    return \@offers;
+}
+
+# Find number of pages for the $search term.
+sub pages {
+    my $search = shift;
+
+    my $page = 1;
+    my $url =
+      "http://www.profesia.sk/search.php?search_anywhere=$search&tab_name=offer&page_num=$page";
+    my $ua  = Mojo::UserAgent->new;
+    my $dom = $ua->get($url)->res->dom;
+
+    #<<<
+    my @links = $dom->find('a[href]')
+        ->map( attr => 'href' )
+        ->grep(qr/page_num=\d+$/)
+        ->each;
+    #>>>
+    my $max = 1;    # highest page number
+    for (@links) {
+        my $page = $1 if /(\d+)$/;
+        $max = $page if $page > $max;
+    }
+
+    return $max;
+}
+
+__END__
+
+=head1 NAME
+
+profesia-jobs - search jobs at profesia.sk
+
+=head1 SYNOPSIS
+
+profesia-jobs [options] <string> [<string2> <string3> ...]
+
+  Options:
+    --help      brief help message
+    --man       full documentation
+    --count     only count number of jobs per string
+
+=head1 DESCRIPTION
+
+Search string(s) in profesia.sk using the basic search. Output is in CSV
+format, UTF-8 encoded. The output columns are date, search term (string), job
+ID, employer/company, job title.
+
+=head1 EXAMPLES
+
+Count job offers:
+
+    profesia-jobs --count perl python ruby
+
+Print job offers
+
+    profesia-jobs perl 'spravca siete' > jobs.csv
+
+=cut
+
