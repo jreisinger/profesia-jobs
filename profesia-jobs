@@ -34,7 +34,7 @@ pod2usage( -exitval => 0, -verbose => 2, -noperldoc => 1 ) if $man;
 my @search_terms = @ARGV;
 
 my $t = localtime;
-my $DATE = sprintf "%4d%02d%02d", $t->year, $t->mon, $t->mday;
+my $DATE = sprintf "%4d-%02d-%02d", $t->year, $t->mon, $t->mday;
 
 for my $search (@search_terms) {
     my $n_pages = pages($search);
