@@ -1,3 +1,4 @@
 # profesia-jobs
 
-`profesia-jobs --man`
+    cpanm Mojo::UserAgent
+    profesia-jobs --man
