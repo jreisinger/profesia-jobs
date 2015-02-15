@@ -1,0 +1,102 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use autodie;
+use Getopt::Long;
+use Pod::Usage;
+use GD::Graph::lines;
+use Text::CSV;
+
+#################
+# Configuration #
+#################
+
+# Command line options
+my $help = 0;
+my $man  = 0;
+my $file = 'jobs-count.csv';
+my ( $maxcount, $select, $exclude );
+GetOptions(
+    "help|h|?"   => \$help,
+    man          => \$man,
+    "file=s"     => \$file,
+    "maxcount=i" => \$maxcount,
+    "select=s"   => \$select,
+    "exclude=s"  => \$exclude,
+) or pod2usage(2);
+
+# Help
+pod2usage(1) if $help;
+pod2usage( -exitval => 0, -verbose => 2, -noperldoc => 1 ) if $man;
+
+########
+# Main #
+########
+
+my $csv = Text::CSV->new( { binary => 1, sep_char => ';' } )
+  or die "Cannot use CSV: " . Text::CSV->error_diag();
+
+open my $fh, "<:encoding(utf8)", $file;
+
+# Read in data from CSV file
+my @dates;
+my %data;
+while ( my $row = $csv->getline($fh) ) {
+    my ( $date, $search_term, $count ) = @$row;
+    next if $select and $search_term !~ /$select/;
+    next if $exclude and $search_term =~ /$exclude/;
+    push @dates, $date;
+    push @{ $data{$search_term} }, [$count];
+}
+$csv->eof or $csv->error_diag();
+close $fh;
+
+# Remove repeating dates
+my %uniq;
+undef @uniq{@dates};
+@dates = sort keys %uniq;
+
+# Prepare data to be graphed
+my @graph_data;
+push @graph_data, [@dates];
+my @search_terms = keys %data;
+for my $search_term (@search_terms) {
+    my @data = map $_->[0], @{ $data{$search_term} };
+    push @graph_data, [@data];
+}
+
+# Generate graph from data
+my $graph = GD::Graph::lines->new( 800, 600 );
+$graph->set(
+    y_label      => 'Jobs count',
+    y_max_value  => $maxcount,
+    title        => 'Number of jobs at profesia.sk',
+    x_label_skip => 7,
+) or die $graph->error;
+$graph->set_legend(@search_terms) or die $graph->error;
+my $gd = $graph->plot( \@graph_data ) or die $graph->error;
+
+# Save graph
+open( my $img, '>', 'jobs-count.jpg' );
+binmode $img;
+print $img $gd->jpeg;
+
+__END__
+
+=head1 NAME
+
+gen-graph - generate graph from CSV file created via C<profesia-jobs --count>
+
+=head1 SYNOPSIS
+
+gen-graph [options]
+
+  Options:
+    --help          brief help message
+    --man           full documentation
+    --file          CSV file holding date, search term a count data (default: ./jobs-count.csv)
+    --maxcount INT  don't show search terms exceeding INT jobs count (Y axis)
+    --select REGEX  select only search terms matching REGEX
+    --exclude REGEX skip search terms matching REGEX
+
+=cut
