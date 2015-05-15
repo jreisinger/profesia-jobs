@@ -1,7 +1,7 @@
 profesia-jobs
 =============
 
-Installation
+Installation and running
 
     cpanm Mojo::UserAgent
     profesia-jobs --man
