@@ -71,7 +71,7 @@ $graph->set(
     y_label      => 'Jobs count',
     y_max_value  => $maxcount,
     title        => 'Number of jobs at profesia.sk',
-    x_label_skip => 7,
+    x_label_skip => 14,
 ) or die $graph->error;
 $graph->set_legend(@search_terms) or die $graph->error;
 my $gd = $graph->plot( \@graph_data ) or die $graph->error;
