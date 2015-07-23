@@ -15,12 +15,14 @@ use Text::CSV;
 my $help = 0;
 my $man  = 0;
 my $file = 'jobs-count.csv';
-my ( $maxcount, $select, $exclude );
+my ( $maxcount, $mincount, $select, $exclude, $xskip );
 GetOptions(
     "help|h|?"   => \$help,
     man          => \$man,
     "file=s"     => \$file,
     "maxcount=i" => \$maxcount,
+    "mincount=i" => \$mincount,
+    "xskip=i"    => \$xskip,
     "select=s"   => \$select,
     "exclude=s"  => \$exclude,
 ) or pod2usage(2);
@@ -68,10 +70,12 @@ for my $search_term (@search_terms) {
 # Generate graph from data
 my $graph = GD::Graph::lines->new( 800, 600 );
 $graph->set(
-    y_label      => 'Jobs count',
-    y_max_value  => $maxcount,
-    title        => 'Number of jobs at profesia.sk',
-    x_label_skip => 14,
+    y_label       => 'Jobs count',
+    y_max_value   => $maxcount,
+    y_min_value   => $mincount,
+    title         => 'Number of jobs at profesia.sk',
+    x_tick_offset => 1,
+    x_label_skip  => $xskip,
 ) or die $graph->error;
 $graph->set_legend(@search_terms) or die $graph->error;
 my $gd = $graph->plot( \@graph_data ) or die $graph->error;
@@ -96,6 +100,8 @@ gen-graph [options]
     --man           full documentation
     --file          CSV file holding date, search term a count data (default: ./jobs-count.csv)
     --maxcount INT  don't show search terms exceeding INT jobs count (Y axis)
+    --mincount INT  don't show search terms below INT jobs count (Y axis)
+    --xskip INT     print every INTth tick on X axis
     --select REGEX  select only search terms matching REGEX
     --exclude REGEX skip search terms matching REGEX
 
