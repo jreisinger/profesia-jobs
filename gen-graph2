@@ -1,0 +1,133 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use 5.010;
+use autodie;
+use Getopt::Long;
+use Pod::Usage;
+use GD::Graph::lines;
+use Text::CSV;
+
+#################
+# Configuration #
+#################
+
+# Command line options
+my $help = 0;
+my $man  = 0;
+my $file = 'jobs-count.csv';
+my ( $maxcount, $mincount, $select, $exclude, $xskip );
+my $title = 'Number of jobs at profesia.sk';
+GetOptions(
+    "help|h|?"   => \$help,
+    man          => \$man,
+    "file=s"     => \$file,
+    "maxcount=i" => \$maxcount,
+    "mincount=i" => \$mincount,
+    "xskip=i"    => \$xskip,
+    "select=s"   => \$select,
+    "exclude=s"  => \$exclude,
+    "title=s"    => \$title,
+) or pod2usage(2);
+
+# Help
+pod2usage(1) if $help;
+pod2usage( -exitval => 0, -verbose => 2, -noperldoc => 1 ) if $man;
+
+########
+# Main #
+########
+
+my $csv = Text::CSV->new( { binary => 1, sep_char => ';' } )
+  or die "Cannot use CSV: " . Text::CSV->error_diag();
+
+open my $fh, "<:encoding(utf8)", $file;
+
+# Read in data from CSV file
+my @dates;
+my %data;
+while ( my $row = $csv->getline($fh) ) {
+    my ( $date, $search_term, $count ) = @$row;
+    next if $select  and $search_term !~ /$select/;
+    next if $exclude and $search_term =~ /$exclude/;
+
+    #push @dates, $date;
+    push @{ $data{$date}{$search_term} }, [$count];
+}
+$csv->eof or $csv->error_diag();
+close $fh;
+
+# Prepare data to be graphed: array of arrays. First array is the X axis, the
+# rest are counts for differrent search terms.
+
+## Get list of unique search terms
+my @unique_terms;
+my %seen;
+for my $date ( keys %data ) {
+    for my $term ( keys %{ $data{$date} } ) {
+        push @unique_terms, $term unless $seen{$term}++;
+    }
+}
+
+## Create data structure for GD::Graph (array of arrays)
+my @graph_data;
+for my $date ( keys %data ) {
+    push @{$graph_data[0]}, $date;
+    for my $i ( 1 .. $#unique_terms ) {
+        if ( grep $unique_terms[$i], keys %{ $data{$date} } ) {
+            push @{$graph_data[ $i + 1 ]}, $data{$date}{$unique_terms[$i]};
+        } else {
+            push @{$graph_data[ $i + 1 ]}, undef;
+        }
+    }
+}
+
+use Data::Dumper;
+print Dumper \@graph_data;
+exit;
+
+# Generate graph from data
+my $graph = GD::Graph::lines->new( 800, 600 );
+$graph->set(
+    y_label       => 'Jobs count',
+    y_max_value   => $maxcount,
+    y_min_value   => $mincount,
+    title         => $title,
+    x_tick_offset => 1,
+    x_label_skip  => $xskip,
+) or die $graph->error;
+$graph->set_legend(@unique_terms) or die $graph->error;
+my $gd = $graph->plot( \@graph_data ) or die $graph->error;
+
+# Save graph
+my $outfile = 'jobs-count';    # default file name
+unless ( $title eq 'Number of jobs at profesia.sk' ) {    # unless default title
+    ( $outfile = $title ) =~ s/\s+/_/g;
+    $outfile = lc $outfile;
+}
+open( my $img, '>', "$outfile.jpg" );
+binmode $img;
+print $img $gd->jpeg;
+
+__END__
+
+=head1 NAME
+
+gen-graph - generate graph from CSV file created via C<profesia-jobs --count>
+
+=head1 SYNOPSIS
+
+gen-graph [options]
+
+  Options:
+    --help          brief help message
+    --man           full documentation
+    --file          CSV file holding date, search term a count data (default: ./jobs-count.csv)
+    --maxcount INT  don't show search terms exceeding INT jobs count (Y axis)
+    --mincount INT  don't show search terms below INT jobs count (Y axis)
+    --xskip INT     print every INTth tick on X axis
+    --select REGEX  select only search terms matching REGEX
+    --exclude REGEX skip search terms matching REGEX
+    --title STRING  graph title and output file name (+ ".jpg")
+
+=cut
