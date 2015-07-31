@@ -20,26 +20,9 @@
 
     <section class="main-content">
       <h1>
-<a id="profesia-jobs" class="anchor" href="#profesia-jobs" aria-hidden="true"><span class="octicon octicon-link"></span></a>profesia-jobs</h1>
+<a id="graphs" class="anchor" href="#graphs" aria-hidden="true"><span class="octicon octicon-link"></span></a>Graphs</h1>
 
-<p>Installation and running</p>
-
-<pre><code>cpanm Mojo::UserAgent GD::Graph::lines Text::CSV
-profesia-jobs --man
-gen-graph --man
-</code></pre>
-
-<p>crontab</p>
-
-<pre><code>45 23 * * * PERL5LIB=$PERL5LIB $HOME/bin/profesia-jobs --count linux windows perl python ruby ccna cissp lpic 'linux perl' 'linux python' 'linux ruby' shell bash zabbix nagios icinga cluster bind apache nginx lighttpd varnish haproxy mysql postgresql oracle memcache redis jenkins &gt;&gt; $HOME/public_html/jobs-count.csv
-55 23 * * * PERL5LIB=$PERL5LIB $HOME/bin/profesia-jobs         linux windows perl python ruby ccna cissp lpic 'linux perl' 'linux python' 'linux ruby' shell bash zabbix nagios icinga cluster bind apache nginx lighttpd varnish haproxy mysql postgresql oracle memcache redis jenkins &gt;&gt; $HOME/public_html/jobs.csv
-</code></pre>
-
-<p>Cookbook</p>
-
-<pre><code>wget -O jobs-count.csv http://pub.ist.ac.at/~jreisinger/jobs-count.csv
-./gen-graph --select '^(python|perl|ruby)$' --xskip 28 --title "Scripting Languages"
-</code></pre>
+<p><img src="https://github.com/jreisinger/profesia-jobs/blob/master/scripting_languages.jpg" alt="Scripting Languages"></p>
 
       <footer class="site-footer">
         <span class="site-footer-owner"><a href="https://github.com/jreisinger/profesia-jobs">Profesia Jobs</a> is maintained by <a href="https://github.com/jreisinger">jreisinger</a>.</span>
