@@ -1,6 +1,7 @@
 #!/usr/bin/env perl
 use strict;
 use warnings;
+use 5.010;
 use autodie;
 use Getopt::Long;
 use Pod::Usage;
@@ -17,6 +18,7 @@ my $man  = 0;
 my $file = 'jobs-count.csv';
 my ( $maxcount, $mincount, $select, $exclude, $xskip );
 my $title = 'Number of jobs at profesia.sk';
+my $searchterms;
 GetOptions(
     "help|h|?"   => \$help,
     man          => \$man,
@@ -27,6 +29,7 @@ GetOptions(
     "select=s"   => \$select,
     "exclude=s"  => \$exclude,
     "title=s"    => \$title,
+    searchterms  => \$searchterms,
 ) or pod2usage(2);
 
 # Help
@@ -41,6 +44,20 @@ my $csv = Text::CSV->new( { binary => 1, sep_char => ';' } )
   or die "Cannot use CSV: " . Text::CSV->error_diag();
 
 open my $fh, "<:encoding(utf8)", $file;
+
+# Get all search terms
+my %seen;
+my @uniq_search_terms;
+while ( my $row = $csv->getline($fh) ) {
+    my ( $date, $search_term, $count ) = @$row;
+    push @uniq_search_terms, $search_term unless $seen{$search_term}++;
+}
+
+# Only print out uniq search terms and exit
+if ($searchterms) {
+    say for sort @uniq_search_terms;
+    exit;
+}
 
 # Read in data from CSV file
 my @dates;
@@ -112,5 +129,6 @@ gen-graph [options]
     --select REGEX  select only search terms matching REGEX
     --exclude REGEX skip search terms matching REGEX
     --title STRING  graph title and output file name (+ ".jpg")
+    --searchterms   just list unique search terms and exit
 
 =cut
