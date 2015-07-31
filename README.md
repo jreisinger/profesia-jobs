@@ -3,7 +3,7 @@ profesia-jobs
 
 Installation and running
 
-    cpanm Mojo::UserAgent
+    cpanm Mojo::UserAgent GD::Graph::lines Text::CSV
     profesia-jobs --man
     gen-graph --man
 
