@@ -1,0 +1,16 @@
+#!/usr/bin/env perl
+use strict;
+use warnings;
+use autodie;
+
+system "wget -O jobs-count.csv http://pub.ist.ac.at/~jreisinger/jobs-count.csv";
+
+my %regex = (
+    "Scripting Languages" => '^(python|perl|ruby|shell|bash)$',
+    "Operating Systems"   => '^(linux|windows)$',
+    "Certifications"      => '^(ccna|cissp|lpic)$',
+);
+
+for my $title ( keys %regex ) {
+    system "./gen-graph --select '$regex{$title}' --xskip 28 --title '$title'";
+}
