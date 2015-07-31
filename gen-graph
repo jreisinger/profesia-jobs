@@ -16,6 +16,7 @@ my $help = 0;
 my $man  = 0;
 my $file = 'jobs-count.csv';
 my ( $maxcount, $mincount, $select, $exclude, $xskip );
+my $title = 'Number of jobs at profesia.sk';
 GetOptions(
     "help|h|?"   => \$help,
     man          => \$man,
@@ -25,6 +26,7 @@ GetOptions(
     "xskip=i"    => \$xskip,
     "select=s"   => \$select,
     "exclude=s"  => \$exclude,
+    "title=s"    => \$title,
 ) or pod2usage(2);
 
 # Help
@@ -45,7 +47,7 @@ my @dates;
 my %data;
 while ( my $row = $csv->getline($fh) ) {
     my ( $date, $search_term, $count ) = @$row;
-    next if $select and $search_term !~ /$select/;
+    next if $select  and $search_term !~ /$select/;
     next if $exclude and $search_term =~ /$exclude/;
     push @dates, $date;
     push @{ $data{$search_term} }, [$count];
@@ -73,7 +75,7 @@ $graph->set(
     y_label       => 'Jobs count',
     y_max_value   => $maxcount,
     y_min_value   => $mincount,
-    title         => 'Number of jobs at profesia.sk',
+    title         => $title,
     x_tick_offset => 1,
     x_label_skip  => $xskip,
 ) or die $graph->error;
@@ -104,5 +106,6 @@ gen-graph [options]
     --xskip INT     print every INTth tick on X axis
     --select REGEX  select only search terms matching REGEX
     --exclude REGEX skip search terms matching REGEX
+    --title STRING  graph title
 
 =cut
