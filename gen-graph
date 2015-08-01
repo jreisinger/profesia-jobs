@@ -65,6 +65,7 @@ for my $date ( keys %data ) {
         push @unique_terms, $term unless $seen{$term}++;
     }
 }
+@unique_terms = sort @unique_terms;
 
 ## Create data structure for GD::Graph - array of arrays. First array [0] is
 ## the X axis, the rest are counts for differrent search terms.
@@ -90,7 +91,7 @@ $graph->set(
     x_tick_offset => 1,
     x_label_skip  => $xskip,
 ) or die $graph->error;
-$graph->set_legend(@unique_terms) or die $graph->error;
+$graph->set_legend( sort @unique_terms ) or die $graph->error;
 my $gd = $graph->plot( \@graph_data ) or die $graph->error;
 
 # Save graph
