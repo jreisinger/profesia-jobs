@@ -9,6 +9,11 @@ my %regex = (
     "Scripting Languages" => '^(python|perl|ruby|shell|bash)$',
     "Operating Systems"   => '^(linux|windows)$',
     "Certifications"      => '^(ccna|cissp|lpic)$',
+    "Linux sysadmin"      => '^(linux perl|linux python|linux ruby)$',
+    "Monitoring"          => '^(zabbix|nagios|icinga)$',
+    "Databases"           => '^(mysql|postgresql|oracle)$',
+    "Web servers"         => '^(apache|nginx|lighttpd)$',
+    "Other"               => '^(cluster|bind|haproxy|memcache|redis|jenkins)$',
 );
 
 for my $title ( keys %regex ) {
