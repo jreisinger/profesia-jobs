@@ -84,12 +84,13 @@ for my $date ( sort keys %data ) {
 # Generate graph from data
 my $graph = GD::Graph::lines->new( 800, 600 );
 $graph->set(
-    y_label       => 'Number of job offers containing the search term',
-    y_max_value   => $maxcount,
-    y_min_value   => $mincount,
-    title         => $title,
-    x_tick_offset => 1,
-    x_label_skip  => $xskip,
+    y_label           => 'Number of job offers containing the search term',
+    y_max_value       => $maxcount,
+    y_min_value       => $mincount,
+    title             => $title,
+    x_tick_offset     => 1,
+    x_label_skip      => $xskip,
+    x_last_label_skip => 1,
 ) or die $graph->error;
 $graph->set_legend( sort @unique_terms ) or die $graph->error;
 my $gd = $graph->plot( \@graph_data ) or die $graph->error;
