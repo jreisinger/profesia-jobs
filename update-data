@@ -5,6 +5,9 @@ use autodie;
 
 system "wget -O jobs-count.csv http://pub.ist.ac.at/~jreisinger/jobs-count.csv";
 
+system "echo 'Date,Term,Count' > jobs-count_for-github.csv";
+system "cat jobs-count.csv | sed 's/;/,/g' >> jobs-count_for-github.csv";
+
 my %regex = (
     "Scripting Languages" => '^(python|perl|ruby|shell|bash)$',
     "Operating Systems"   => '^(linux|windows)$',
