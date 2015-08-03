@@ -3,11 +3,8 @@ use Local::Modulino;
 use LWP::Simple;
 use Test::More;
 
-my @search_terms = (
-    "linux", "windows", "perl",       "python",
-    "ruby",  "lpic",    "linux perl", "linux python",
-    "linux ruby"
-);
+my @search_terms =
+  ( "windows", "perl", "ruby", "lpic", "linux", "linux perl", "linux python" );
 
 for my $search (@search_terms) {
 
