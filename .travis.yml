@@ -1,10 +1,11 @@
 language: perl
 perl:
-  - "5.20"
-  - "5.18"
-  - "5.16"
-  - "5.14"
-  - "5.12"
-  - "5.10"
-
-script: perl profesia-jobs.t
+    - "5.20"
+    - "5.18"
+    - "5.16"
+    - "5.14"
+    - "5.12"
+    - "5.10"
+install:
+    - cpanm --quiet --notest Mojo::UserAgent GD::Graph::lines Text::CSV
+script: prove -lr profesia-jobs.t
