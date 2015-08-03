@@ -7,5 +7,5 @@ perl:
     - "5.12"
     - "5.10"
 install:
-    - cpanm --quiet --notest Mojo::UserAgent
+    - cpanm --quiet --notest Mojo::UserAgent local::lib
 script: prove -lr profesia-jobs.t
