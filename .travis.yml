@@ -7,5 +7,5 @@ perl:
     - "5.12"
     - "5.10"
 install:
-    - cpanm --quiet --notest Mojo::UserAgent GD::Graph::lines Text::CSV
+    - cpanm --quiet --notest Mojo::UserAgent GD::Graph GD::Graph::lines Text::CSV
 script: prove -lr profesia-jobs.t
