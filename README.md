@@ -1,6 +1,8 @@
 profesia-jobs
 =============
 
+[![Build Status](https://travis-ci.org/jreisinger/profesia-jobs.svg?branch=master)](https://travis-ci.org/jreisinger/profesia-jobs)
+
 Installation
 
     cpanm Mojo::UserAgent GD::Graph::lines Text::CSV
@@ -13,4 +15,3 @@ Collecting data (crontab on a server)
 Updating graphs (anywhere)
 
     ./update-data
-
