@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 use Local::Search;
-use LWP::Simple;
+use LWP::Simple qw($ua get);
 use Test::More;
 
 my @search_terms =
@@ -15,6 +15,7 @@ for my $search (@search_terms) {
     # Profesia web search results count
     my $url =
       qq(http://www.profesia.sk/search.php?which_form=simple&tab_name=&log_term=1&cnt_offered=&search_anywhere=$search&submit_search_simple.x=0&submit_search_simple.y=0);
+    $ua->agent('Mozilla/5.0');
     my $content = get($url) or die 'Unable to get page';
     ( my $n_offers ) = $content =~ /ponuky\s+\((\d+)\)/;
 
