@@ -1,5 +1,5 @@
 #!/usr/bin/perl
-use Local::Modulino;
+use Local::Search;
 use LWP::Simple;
 use Test::More;
 
@@ -9,8 +9,8 @@ my @search_terms =
 for my $search (@search_terms) {
 
     # My script search results count
-    my $n_pages = Local::Modulino::pages($search);
-    my $offers = Local::Modulino::search_pages( $search, $n_pages );
+    my $n_pages = Local::Search::pages($search);
+    my $offers = Local::Search::search_pages( $search, $n_pages );
 
     # Profesia web search results count
     my $url =
