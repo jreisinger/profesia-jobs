@@ -3344,3 +3344,32 @@ Date,Term,Count
 2015-08-02,memcache,4
 2015-08-02,redis,8
 2015-08-02,jenkins,25
+2015-08-03,linux,0
+2015-08-03,windows,0
+2015-08-03,perl,0
+2015-08-03,python,0
+2015-08-03,ruby,0
+2015-08-03,ccna,0
+2015-08-03,cissp,0
+2015-08-03,lpic,0
+2015-08-03,linux perl,0
+2015-08-03,linux python,0
+2015-08-03,linux ruby,0
+2015-08-03,shell,0
+2015-08-03,bash,0
+2015-08-03,zabbix,0
+2015-08-03,nagios,0
+2015-08-03,icinga,0
+2015-08-03,cluster,0
+2015-08-03,bind,0
+2015-08-03,apache,0
+2015-08-03,nginx,0
+2015-08-03,lighttpd,0
+2015-08-03,varnish,0
+2015-08-03,haproxy,0
+2015-08-03,mysql,0
+2015-08-03,postgresql,0
+2015-08-03,oracle,0
+2015-08-03,memcache,0
+2015-08-03,redis,0
+2015-08-03,jenkins,0
