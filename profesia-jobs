@@ -66,6 +66,7 @@ sub search_pages {
     my @offers;
 
     my $ua = Mojo::UserAgent->new;
+    $ua->transactor->name('Mozilla/5.0');
     for my $page ( 1 .. $n_pages ) {
         my $url =
           "http://www.profesia.sk/search.php?search_anywhere=$search&tab_name=offer&page_num=$page";
@@ -97,7 +98,8 @@ sub pages {
     my $page = 1;
     my $url =
       "http://www.profesia.sk/search.php?search_anywhere=$search&tab_name=offer&page_num=$page";
-    my $ua  = Mojo::UserAgent->new;
+    my $ua = Mojo::UserAgent->new;
+    $ua->transactor->name('Mozilla/5.0');
     my $dom = $ua->get($url)->res->dom;
 
     #<<<
