@@ -3,6 +3,8 @@ use strict;
 use warnings;
 use autodie;
 
+system "prove -l profesia-jobs.t";
+
 system "wget -O jobs-count.csv http://pub.ist.ac.at/~jreisinger/jobs-count.csv";
 
 system "echo 'Date,Term,Count' > jobs-count_for-github.csv";
