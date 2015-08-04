@@ -1,9 +1,5 @@
 #!/usr/bin/perl
-
-# see http://stackoverflow.com/questions/468675/how-can-i-test-a-standalone-perl-script
 package Local::Search;
-__PACKAGE__->run() unless caller();
-
 use local::lib;
 use strict;
 use warnings;
@@ -30,6 +26,9 @@ pod2usage( -exitval => 0, -verbose => 2, -noperldoc => 1 ) if $man;
 
 my $t = localtime;
 my $DATE = sprintf "%4d-%02d-%02d", $t->year, $t->mon, $t->mday;
+
+# see http://stackoverflow.com/questions/468675/how-can-i-test-a-standalone-perl-script
+__PACKAGE__->run() unless caller();
 
 # (Previously Main)
 sub run {
