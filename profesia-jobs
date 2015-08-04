@@ -1,5 +1,9 @@
 #!/usr/bin/perl
-package Local::Modulino;
+
+# see http://stackoverflow.com/questions/468675/how-can-i-test-a-standalone-perl-script
+package Local::Search;
+__PACKAGE__->run() unless caller();
+
 use local::lib;
 use strict;
 use warnings;
@@ -9,10 +13,6 @@ use Getopt::Long;
 use Pod::Usage;
 use Mojo::UserAgent;
 use Time::Piece;
-
-#################
-# Configuration #
-#################
 
 # Command line options
 my $help = 0;
@@ -28,21 +28,10 @@ GetOptions(
 pod2usage(1) if $help;
 pod2usage( -exitval => 0, -verbose => 2, -noperldoc => 1 ) if $man;
 
-########
-# Main #
-########
-
 my $t = localtime;
 my $DATE = sprintf "%4d-%02d-%02d", $t->year, $t->mon, $t->mday;
 
-__PACKAGE__->run() unless caller();
-
-#############
-# Functions #
-#############
-
-# Main, actually
-# see http://stackoverflow.com/questions/468675/how-can-i-test-a-standalone-perl-script
+# (Previously Main)
 sub run {
     my @search_terms = @ARGV;
 
