@@ -8,4 +8,4 @@ perl:
     - "5.10"
 install:
     - cpanm --quiet --notest Mojo::UserAgent local::lib LWP::Simple
-script: prove -lv profesia-jobs.t
+script: prove -lvr 
