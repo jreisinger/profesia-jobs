@@ -40,5 +40,3 @@ SKIP: {
     }
 
 }
-
-done_testing();

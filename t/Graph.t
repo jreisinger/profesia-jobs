@@ -9,13 +9,11 @@ my $data;
 {
     my $file = '/tmp/profesia-test.csv';
     open my $fh, ">", $file;
-    say $fh "2015-01-25;linux perl;26";
-    say $fh "2015-01-25;perl;59";
-    say $fh "2015-01-25;python;49";
-    say $fh "2015-01-26;linux perl;59";
+    print $fh "$_" while <DATA>;
     close $fh;
 
     $data = Local::Graph::read_csv($file);
+    unlink $file;
     for my $date ( sort keys %$data ) {
         like( $date, qr/2015-01-2[56]/, "date read from CSV file" );
     }
@@ -42,4 +40,8 @@ my $data;
     is_deeply( $got, $expected, "prepare data for graphing" );
 }
 
-done_testing();
+__DATA__
+2015-01-25;linux perl;26
+2015-01-25;perl;59
+2015-01-25;python;49
+2015-01-26;linux perl;59
