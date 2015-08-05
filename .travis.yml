@@ -6,6 +6,9 @@ perl:
     - "5.14"
     - "5.12"
     - "5.10"
+before_install:
+      - sudo apt-get update -qq
+      - sudo apt-get install -y libgd-graph-perl
 install:
-    - cpanm --quiet --notest Mojo::UserAgent local::lib LWP::Simple GD::Graph::lines
+    - cpanm --quiet --notest Mojo::UserAgent local::lib LWP::Simple
 script: prove -lvr
