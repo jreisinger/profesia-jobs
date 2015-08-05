@@ -3,7 +3,7 @@ use strict;
 use warnings;
 use autodie;
 
-system "prove -l profesia-jobs.t" and die "Tests don't pass";
+system "prove -lvr" and die "Tests don't pass";
 
 system "wget -O jobs-count.csv http://pub.ist.ac.at/~jreisinger/jobs-count.csv";
 
