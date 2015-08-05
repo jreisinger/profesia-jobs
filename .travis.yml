@@ -8,7 +8,7 @@ perl:
     - "5.10"
 before_install:
       - sudo apt-get update -qq
-      - sudo apt-get install -y libgd-graph-perl
+      - sudo apt-get install -y libgd-graph-perl libgd2-xpm-dev
 install:
-    - cpanm --quiet --notest Mojo::UserAgent local::lib LWP::Simple
+    - cpanm --quiet --notest Mojo::UserAgent local::lib LWP::Simple GD::Graph::lines
 script: prove -lvr
