@@ -1,7 +1,7 @@
 #!/usr/bin/perl
 use Local::Search;
 use LWP::Simple qw($ua get);
-use Test::More;
+use Test::More tests => 7;
 
 SKIP: {
 
@@ -26,7 +26,17 @@ SKIP: {
         my $n_pages = Local::Search::pages($search);
         my $offers = Local::Search::search_pages( $search, $n_pages );
 
-        is( scalar @$offers, $n_offers, "Number of offers for $search" );
+        my $n_offers_mine = @$offers;
+
+        # Offers can be added/removed in between the two searches so approximate
+        # equality is checked
+        my $ten_percent = $n_offers_mine / 10;
+        my $test        = $n_offers_mine >= $n_offers - $ten_percent
+          and $n_offers_mine <= $n_offers + $ten_percent;
+
+        my $test_name =
+          "number of offers for $search (mine: $n_offers_mine, profesia: $n_offers)";
+        ok( $test, $test_name );
     }
 
 }

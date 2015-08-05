@@ -1,6 +1,6 @@
 #!/usr/bin/perl
 use Local::Graph;
-use Test::More;
+use Test::More tests => 7;
 use 5.010;
 use autodie;
 
