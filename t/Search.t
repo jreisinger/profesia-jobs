@@ -17,9 +17,7 @@ SKIP: {
           qq(http://www.profesia.sk/search.php?which_form=simple&tab_name=&log_term=1&cnt_offered=&search_anywhere=$search&submit_search_simple.x=0&submit_search_simple.y=0);
         $ua->agent('Mozilla/5.0');
         my $content = get($url);
-        skip
-          unless
-          $content; # stopped working on travis for unknown reason, so I skip it
+        skip q(Can't search profesia.sk), 7 unless $content;
         ( my $n_offers ) = $content =~ /ponuky\s+\((\d+)\)/;
 
         # My script search results count
