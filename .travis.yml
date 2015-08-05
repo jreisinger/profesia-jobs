@@ -9,6 +9,6 @@ perl:
 before_install:
       - sudo apt-get update -qq
       - sudo apt-get install -y libgd-graph-perl libgd2-xpm-dev
-install:
-    - cpanm --quiet --notest Mojo::UserAgent local::lib LWP::Simple GD::Graph::lines
+#install:
+#    - cpanm --quiet --notest Mojo::UserAgent local::lib LWP::Simple GD::Graph::lines Text::CSV
 script: prove -lvr
