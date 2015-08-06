@@ -14,3 +14,9 @@ Collecting data (crontab on a server)
 Updating [graphs](http://jreisinger.github.io/profesia-jobs) (anywhere)
 
     ./update-data
+
+Show Linux shops and job titles
+
+    wget http://ist.ac.at/~jreisinger/jobs.csv -O - | perl -F';' -alne 'print \
+    "$F[1] ($F[3]): $F[4]" if $F[1] eq "linux"' | sort | uniq | less
+
