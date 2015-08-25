@@ -18,7 +18,7 @@ my %regex = (
     "Monitoring"          => '^(zabbix|nagios|icinga)$',
     "Databases"           => '^(mysql|postgresql|oracle)$',
     "Web servers"         => '^(apache|nginx|lighttpd)$',
-    "Configuration mngt." => '^(puppet|chef|salt|cfengine|ansible)$',
+    "Configuration mngt"  => '^(puppet|chef|salt|cfengine|ansible)$',
     "Other"               => '^(cluster|bind|haproxy|memcache|redis|jenkins)$',
 );
 
