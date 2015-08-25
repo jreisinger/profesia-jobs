@@ -3,8 +3,8 @@
 profesia-jobs
 =============
 
-(Graphs)[http://jreisinger.github.io/profesia-jobs/] showing number of job
-postings at (profesia.sk)[http://profesia.sk] containing certain technical
+[Graphs](http://jreisinger.github.io/profesia-jobs/) showing number of job
+postings at [profesia.sk](http://profesia.sk) containing certain technical
 terms.
 
 Installation -- see `.travis.yml`.
