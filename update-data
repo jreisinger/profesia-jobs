@@ -11,13 +11,14 @@ system "echo 'Date,Term,Count' > jobs-count_for-github.csv";
 system "cat jobs-count.csv | sed 's/;/,/g' >> jobs-count_for-github.csv";
 
 my %regex = (
-    "Scripting Languages" => '^(python|perl|ruby|shell|bash)$',
-    "Operating Systems"   => '^(linux|windows)$',
+    "Scripting languages" => '^(python|perl|ruby|shell|bash)$',
+    "Operating systems"   => '^(linux|windows)$',
     "Certifications"      => '^(ccna|cissp|lpic)$',
     "Linux sysadmin"      => '^(linux perl|linux python|linux ruby)$',
     "Monitoring"          => '^(zabbix|nagios|icinga)$',
     "Databases"           => '^(mysql|postgresql|oracle)$',
     "Web servers"         => '^(apache|nginx|lighttpd)$',
+    "Configuration mngt." => '^(puppet|chef|salt|cfengine|ansible)$',
     "Other"               => '^(cluster|bind|haproxy|memcache|redis|jenkins)$',
 );
 
