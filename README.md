@@ -3,6 +3,9 @@
 profesia-jobs
 =============
 
+Number of job postings at profesia.sk containing some technical terms -
+http://jreisinger.github.io/profesia-jobs/
+
 Installation -- see `.travis.yml`
 
 Collecting data (crontab on a server)
