@@ -3982,3 +3982,37 @@ Date,Term,Count
 2015-08-24,memcache,4
 2015-08-24,redis,6
 2015-08-24,jenkins,23
+2015-08-25,linux,337
+2015-08-25,windows,549
+2015-08-25,perl,58
+2015-08-25,python,65
+2015-08-25,ruby,14
+2015-08-25,ccna,45
+2015-08-25,cissp,7
+2015-08-25,lpic,0
+2015-08-25,linux perl,38
+2015-08-25,linux python,37
+2015-08-25,linux ruby,9
+2015-08-25,shell,56
+2015-08-25,bash,40
+2015-08-25,zabbix,4
+2015-08-25,nagios,5
+2015-08-25,icinga,1
+2015-08-25,cluster,28
+2015-08-25,bind,7
+2015-08-25,apache,68
+2015-08-25,nginx,3
+2015-08-25,lighttpd,0
+2015-08-25,varnish,1
+2015-08-25,haproxy,1
+2015-08-25,mysql,113
+2015-08-25,postgresql,30
+2015-08-25,oracle,280
+2015-08-25,memcache,3
+2015-08-25,redis,5
+2015-08-25,jenkins,24
+2015-08-25,puppet,7
+2015-08-25,chef,11
+2015-08-25,salt,0
+2015-08-25,cfengine,1
+2015-08-25,ansible,2
