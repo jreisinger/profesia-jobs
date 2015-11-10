@@ -19,7 +19,8 @@ my %regex = (
     "Databases"           => '^(mysql|postgresql|oracle)$',
     "Web servers"         => '^(apache|nginx|lighttpd)$',
     "Configuration mngt"  => '^(puppet|chef|salt|cfengine|ansible)$',
-    "Other"               => '^(cluster|bind|haproxy|memcache|redis|jenkins)$',
+    "DevOps"              => '^(devops|cloud|aws|agile|scrum)$',
+    "Other"               => '^(cluster|bind|haproxy|memcache|redis|jenkins|docker)$',
 );
 
 for my $title ( keys %regex ) {
