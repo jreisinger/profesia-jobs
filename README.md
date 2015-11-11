@@ -29,3 +29,4 @@ Adding new search terms
 
 1. Add search term(s) in the crontab job (see above)
 2. Modify %regex in update-data accordingly
+3. Add new graph (.jpg) to repo and modify index.hmtl in gh-pages branch
