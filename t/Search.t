@@ -1,5 +1,6 @@
 #!/usr/bin/perl
 use Local::Search;
+use LWP::Protocol::https;
 use LWP::Simple qw($ua get);
 use Test::More tests => 7;
 
@@ -14,7 +15,7 @@ SKIP: {
 
         # Profesia web search results count
         my $url =
-          qq(http://www.profesia.sk/search.php?which_form=simple&tab_name=&log_term=1&cnt_offered=&search_anywhere=$search&submit_search_simple.x=0&submit_search_simple.y=0);
+          qq(https://www.profesia.sk/search.php?which_form=simple&tab_name=&log_term=1&cnt_offered=&search_anywhere=$search&submit_search_simple.x=0&submit_search_simple.y=0);
         $ua->agent('Mozilla/5.0');
         my $content = get($url);
         skip q(Can't search profesia.sk), 7 unless $content;
