@@ -109,7 +109,7 @@ sub create_graph {
     my $graph_data = shift;
     my $data       = shift;
 
-    my $graph = GD::Graph::lines->new( 1024, 768 );
+    my $graph = GD::Graph::lines->new( 1600, 1200 );
     $graph->set(
         y_label           => 'Number of job offers containing the search term',
         y_max_value       => $maxcount,
