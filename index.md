@@ -1,0 +1,17 @@
+![Scripting Languages](https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/scripting_languages.jpg)
+
+![Linux sysadmin](https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/linux_sysadmin.jpg)
+
+![Certifications](https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/certifications.jpg)
+
+![Databases](https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/databases.jpg)
+
+![Monitoring](https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/monitoring.jpg)
+
+![Operating systems](https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/operating_systems.jpg)
+
+![Web servers](https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/web_servers.jpg)
+
+![Configuration mngt](https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/configuration_mngt.jpg)
+
+![Other](https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/other.jpg)
