@@ -27,7 +27,7 @@ my %regex = (
 );
 
 for my $title ( keys %regex ) {
-    system "./gen-graph --select '$regex{$title}' --xskip 28 --title '$title'";
+    system "./gen-graph --select '$regex{$title}' --xskip 50 --title '$title'";
 }
 
 system "git commit -am 'updated data' && git push";
