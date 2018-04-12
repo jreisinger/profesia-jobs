@@ -1,6 +1,6 @@
 ![Scripting Languages](https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/scripting_languages.jpg)
 
-![Linux sysadmin](https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/linux_sysadmin.jpg)
+![Linux scripting](https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/linux_scripting.jpg)
 
 ![Certifications](https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/certifications.jpg)
 
