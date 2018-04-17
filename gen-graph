@@ -154,4 +154,12 @@ gen-graph [options]
     --exclude REGEX skip search terms matching REGEX
     --title STRING  graph title and output file name (+ ".jpg")
 
+In case there are multiple lines with the same date and search term, the last
+one is taken. For example, if your 'jobs-count.csv' contained
+
+    2018-04-12;docker;66
+    2018-04-12;docker;65
+
+the count for the given day would be 65 (not 131, nor 66).
+
 =cut
