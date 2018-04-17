@@ -1,15 +1,22 @@
 [![Build Status](https://travis-ci.org/jreisinger/profesia-jobs.svg?branch=master)](https://travis-ci.org/jreisinger/profesia-jobs)
 
-profesia-jobs
-=============
+## About
 
 [Graphs](http://jreisinger.github.io/profesia-jobs/) showing number of job
 postings at [profesia.sk](http://profesia.sk) containing certain technical
 terms.
 
-Installation -- see `.travis.yml`.
+There are three scripts:
 
-Run from crontab on a server
+* `profesia-jobs` - search jobs at profesia.sk
+* `gen-graph` - generate graph from CSV file created via `profesia-jobs --count`
+* `update-data` - run tests, generate graphs, commit and push to GitHub
+
+## Usage
+
+See `.travis.yml` for installation hints.
+
+Run `profesia-jobs` from crontab on a server:
 
 ```
 PERL5LIB='/home/<username>/perl5/lib/perl5'
@@ -22,6 +29,10 @@ PERL5LIB='/home/<username>/perl5/lib/perl5'
 15 00 * * * PERL5LIB=$PERL5LIB $HOME/github-repos/profesia-jobs/update-data
 ```
 
+Run `update-data` to generate graphs and commit and push new data to GitHub.
+
+## Howtos
+
 Show Linux shops and job titles
 
 ```
@@ -30,7 +41,7 @@ perl -F';' -alne 'print "$F[1] ($F[3]): $F[4]" if $F[1] eq "linux"' | \
 sort | uniq | less
 ```
 
-Adding new search terms
+Add new search term
 
 1. Add search term(s) in the crontab job (see above)
 2. Modify `%regex` in `update-data` accordingly
