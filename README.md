@@ -12,7 +12,7 @@ Installation -- see `.travis.yml`.
 Run from crontab on a server
 
 ```
-PERL5LIB='/home/jreisinger/perl5/lib/perl5'
+PERL5LIB='/home/<username>/perl5/lib/perl5'
 
 # Collecting data
 45 23 * * * PERL5LIB=$PERL5LIB $HOME/github-repos/profesia-jobs/profesia-jobs --count linux windows perl python ruby ccna cissp lpic 'linux perl' 'linux python' 'linux ruby' 'linux bash' 'linux shell' shell bash zabbix nagios icinga cluster bind apache nginx lighttpd varnish haproxy mysql postgresql oracle memcache redis jenkins puppet chef salt cfengine ansible docker devops cloud aws agile scrum >> $HOME/github-repos/profesia-jobs/jobs-count.csv
