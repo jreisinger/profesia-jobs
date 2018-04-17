@@ -3,12 +3,7 @@ use strict;
 use warnings;
 use autodie;
 
-#my $url = 'http://reisingers.duckdns.org/~jreisinger/jobs-count.csv';
-my $url;
-
 system "prove -lvr" and die "Tests don't pass";
-
-system "wget -O jobs-count.csv $url" if defined $url;
 
 system "echo 'Date,Term,Count' > jobs-count_for-github.csv";
 system "cat jobs-count.csv | sed 's/;/,/g' >> jobs-count_for-github.csv";
