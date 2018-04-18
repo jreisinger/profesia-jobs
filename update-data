@@ -3,8 +3,7 @@ use strict;
 use warnings;
 use autodie;
 
-system "prove -lvr" and die "Tests don't pass";
-
+# Create a CSV that can be viewed directly on GitHub...
 system "echo 'Date,Term,Count' > jobs-count_for-github.csv";
 system "cat jobs-count.csv | sed 's/;/,/g' >> jobs-count_for-github.csv";
 
@@ -21,8 +20,10 @@ my %regex = (
     "Other"               => '^(cluster|bind|haproxy|memcache|redis|jenkins|docker)$',
 );
 
+# Generate graphs...
 for my $title ( keys %regex ) {
     system "./gen-graph --select '$regex{$title}' --xskip 50 --title '$title'";
 }
 
+# Commit and push...
 system "git commit -am 'updated data' && git push";
