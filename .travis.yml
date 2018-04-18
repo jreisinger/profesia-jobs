@@ -9,11 +9,10 @@ perl:
     - "5.14"
     - "5.12"
     - "5.10"
-    - "5.8"
 before_install:
-      - sudo apt-get update -qq
-      - sudo apt-get install -y libgd-graph-perl libgd2-xpm-dev gcc
-      #- sudo pacman -S perl-gd perl-gdgraph
+    - sudo apt-get update -qq
+    - sudo apt-get install -y libgd-graph-perl libgd2-xpm-dev gcc
+    #- sudo pacman -S perl-gd perl-gdgraph
 install:
     - cpanm --quiet --notest Mojo::UserAgent local::lib LWP::Simple GD::Graph::lines Text::CSV IO::Socket::SSL LWP::Protocol::https
 script: prove -lvr
