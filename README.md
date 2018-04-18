@@ -10,16 +10,16 @@ There are three scripts:
 
 * `profesia-jobs` - search jobs at profesia.sk
 * `gen-graph` - generate graph from CSV file created via `profesia-jobs --count`
-* `update-data` - run tests, generate graphs, commit and push to GitHub
+* `update-data` - helper script that runs tests, runs `gen-graph`, commits and pushes to GitHub
 
 ## Usage
 
 See `.travis.yml` for installation hints.
 
-Run `profesia-jobs` from crontab on a server:
+Setup crontab jobs:
 
 ```
-PERL5LIB='/home/<username>/perl5/lib/perl5'
+PERL5LIB='/home/reisinge/perl5/lib/perl5'
 
 # Collecting data
 45 23 * * * PERL5LIB=$PERL5LIB $HOME/github-repos/profesia-jobs/profesia-jobs --count linux windows perl python ruby ccna cissp lpic 'linux perl' 'linux python' 'linux ruby' 'linux bash' 'linux shell' shell bash zabbix nagios icinga cluster bind apache nginx lighttpd varnish haproxy mysql postgresql oracle memcache redis jenkins puppet chef salt cfengine ansible docker devops cloud aws agile scrum >> $HOME/github-repos/profesia-jobs/jobs-count.csv
@@ -28,8 +28,6 @@ PERL5LIB='/home/<username>/perl5/lib/perl5'
 # Persisting data and updating graphs
 15 00 * * * PERL5LIB=$PERL5LIB $HOME/github-repos/profesia-jobs/update-data
 ```
-
-Run `update-data` to generate graphs and commit and push new data to GitHub.
 
 ## Howtos
 
