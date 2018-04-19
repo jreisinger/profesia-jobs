@@ -1,3 +1,5 @@
+[Data](https://github.com/jreisinger/profesia-jobs/blob/master/jobs-count_for-github.csv) for the graphs.
+
 ![Scripting Languages](https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/scripting_languages.jpg)
 
 ![Linux scripting](https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/linux_scripting.jpg)
