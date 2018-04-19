@@ -20,10 +20,12 @@ my %regex = (
     "Other"               => '^(cluster|bind|haproxy|memcache|redis|jenkins|docker)$',
 );
 
-# Generate graphs...
+print "Generate graphs\n"
 for my $title ( keys %regex ) {
+    print "--> generating '$title' graph ..."
     system "./gen-graph --select '$regex{$title}' --xskip 50 --title '$title'";
+    print " done\n"
 }
 
-# Commit and push...
+print "Commit and push\n"
 system "git commit -am 'updated data' && git push";
