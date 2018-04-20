@@ -19,14 +19,15 @@ See `.travis.yml` for installation hints.
 Setup crontab jobs:
 
 ```
-PERL5LIB='/home/reisinge/perl5/lib/perl5'
+PERL5LIB="$HOME/perl5/lib/perl5"
+PJ_DIR="$HOME/github-repos/profesia-jobs"
 
-# Collecting data
-45 23 * * * PERL5LIB=$PERL5LIB $HOME/github-repos/profesia-jobs/profesia-jobs --count linux windows perl python ruby ccna cissp lpic 'linux perl' 'linux python' 'linux ruby' 'linux bash' 'linux shell' shell bash zabbix nagios icinga cluster bind apache nginx lighttpd varnish haproxy mysql postgresql oracle memcache redis jenkins puppet chef salt cfengine ansible docker devops cloud aws agile scrum >> $HOME/github-repos/profesia-jobs/jobs-count.csv
-55 23 * * * PERL5LIB=$PERL5LIB $HOME/github-repos/profesia-jobs/profesia-jobs         linux windows perl python ruby ccna cissp lpic 'linux perl' 'linux python' 'linux ruby' 'linux bash' 'linux shell' shell bash zabbix nagios icinga cluster bind apache nginx lighttpd varnish haproxy mysql postgresql oracle memcache redis jenkins puppet chef salt cfengine ansible docker devops cloud aws agile scrum >> $HOME/github-repos/profesia-jobs/jobs.csv
+# Collect data...
+45 23 * * * cd $PJ_DIR && PERL5LIB=$PERL5LIB ./profesia-jobs --count linux windows perl python ruby ccna cissp lpic 'linux perl' 'linux python' 'linux ruby' 'linux bash' 'linux shell' shell bash zabbix nagios icinga cluster bind apache nginx lighttpd varnish haproxy mysql postgresql oracle memcache redis jenkins puppet chef salt cfengine ansible docker devops cloud aws agile scrum >> $HOME/github-repos/profesia-jobs/jobs-count.csv
+55 23 * * * cd $PJ_DIR && PERL5LIB=$PERL5LIB ./profesia-jobs         linux windows perl python ruby ccna cissp lpic 'linux perl' 'linux python' 'linux ruby' 'linux bash' 'linux shell' shell bash zabbix nagios icinga cluster bind apache nginx lighttpd varnish haproxy mysql postgresql oracle memcache redis jenkins puppet chef salt cfengine ansible docker devops cloud aws agile scrum >> $HOME/github-repos/profesia-jobs/jobs.csv
 
-# Persisting data and updating graphs
-15 00 * * * cd $HOME/github-repos/profesia-jobs && PERL5LIB=$PERL5LIB ./update-data
+# Persist data and update graphs...
+15 00 * * * cd $PJ_DIR && PERL5LIB=$PERL5LIB ./update-data
 ```
 
 ## Howtos
