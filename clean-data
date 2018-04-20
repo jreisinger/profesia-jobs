@@ -1,0 +1,9 @@
+#!/bin/bash
+
+for f in *.csv; do
+    echo -n working on $f ... 
+    cp $f /tmp
+    # remove duplicate lines but keep order
+    perl -ne 'print if ++$k{$_}==1' /tmp/$f > $f
+    echo ' done'
+done
