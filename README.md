@@ -26,7 +26,7 @@ PERL5LIB='/home/reisinge/perl5/lib/perl5'
 55 23 * * * PERL5LIB=$PERL5LIB $HOME/github-repos/profesia-jobs/profesia-jobs         linux windows perl python ruby ccna cissp lpic 'linux perl' 'linux python' 'linux ruby' 'linux bash' 'linux shell' shell bash zabbix nagios icinga cluster bind apache nginx lighttpd varnish haproxy mysql postgresql oracle memcache redis jenkins puppet chef salt cfengine ansible docker devops cloud aws agile scrum >> $HOME/github-repos/profesia-jobs/jobs.csv
 
 # Persisting data and updating graphs
-15 00 * * * PERL5LIB=$PERL5LIB $HOME/github-repos/profesia-jobs/update-data
+15 00 * * * cd $HOME/github-repos/profesia-jobs && PERL5LIB=$PERL5LIB ./update-data
 ```
 
 ## Howtos
