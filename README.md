@@ -19,7 +19,7 @@ See `.travis.yml` for installation hints.
 Setup crontab job
 
 ```
-PERL5LIB="$HOME/perl5/lib/perl5" # is this really needed?
+PERL5LIB="$HOME/perl5/lib/perl5"
 PJ_DIR="$HOME/github-repos/profesia-jobs"
 
 # Collect and persist data...
