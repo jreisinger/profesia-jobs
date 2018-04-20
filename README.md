@@ -6,8 +6,6 @@
 postings at [profesia.sk](http://profesia.sk) containing certain technical
 terms.
 
-There are three scripts:
-
 * `profesia-jobs` - search jobs at profesia.sk
 * `gen-graph` - generate graph from CSV file created via `profesia-jobs --count`
 * `update-data` - run `profesia-jobs` + `gen-graph` and commit and push new data (CSVs, graphs) to GitHub
