@@ -10,27 +10,21 @@ There are three scripts:
 
 * `profesia-jobs` - search jobs at profesia.sk
 * `gen-graph` - generate graph from CSV file created via `profesia-jobs --count`
-* `update-data` - helper script that runs tests, runs `gen-graph`, commits and pushes to GitHub
+* `update-data` - run `profesia-jobs` + `gen-graph` and commit and push new data (CSVs, graphs) to GitHub
 
 ## Usage
 
 See `.travis.yml` for installation hints.
 
-Setup crontab jobs:
+Setup crontab job
 
 ```
-PERL5LIB="$HOME/perl5/lib/perl5"
+PERL5LIB="$HOME/perl5/lib/perl5" # is this really needed?
 PJ_DIR="$HOME/github-repos/profesia-jobs"
 
-# Collect data...
-45 23 * * * cd $PJ_DIR && PERL5LIB=$PERL5LIB ./profesia-jobs --count linux windows perl python ruby ccna cissp lpic 'linux perl' 'linux python' 'linux ruby' 'linux bash' 'linux shell' shell bash zabbix nagios icinga cluster bind apache nginx lighttpd varnish haproxy mysql postgresql oracle memcache redis jenkins puppet chef salt cfengine ansible docker devops cloud aws agile scrum >> $HOME/github-repos/profesia-jobs/jobs-count.csv
-55 23 * * * cd $PJ_DIR && PERL5LIB=$PERL5LIB ./profesia-jobs         linux windows perl python ruby ccna cissp lpic 'linux perl' 'linux python' 'linux ruby' 'linux bash' 'linux shell' shell bash zabbix nagios icinga cluster bind apache nginx lighttpd varnish haproxy mysql postgresql oracle memcache redis jenkins puppet chef salt cfengine ansible docker devops cloud aws agile scrum >> $HOME/github-repos/profesia-jobs/jobs.csv
-
-# Persist data and update graphs...
-15 00 * * * cd $PJ_DIR && PERL5LIB=$PERL5LIB ./update-data
+# Collect and persist data...
+45 23 * * * PERL5LIB=$PERL5LIB $PJ_DIR/update-data
 ```
-
-## Howtos
 
 Show Linux shops and job titles
 
@@ -42,6 +36,5 @@ sort | uniq | less
 
 Add new search term
 
-1. Add search term(s) in the crontab job (see above)
-2. Modify `%regex` in `update-data` accordingly
-3. Add new graph (.jpg) to repo and modify `index.hmtl` in *gh-pages* branch
+1. Modify `%terms` in `update-data` accordingly
+2. If you create new category modify `index.hmtl` in *gh-pages* branch

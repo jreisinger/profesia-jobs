@@ -3,28 +3,64 @@ use strict;
 use warnings;
 use autodie;
 
+# Terms to search organized by categories...
+my %terms = (
+    "Scripting languages" => [ qw(python perl ruby shell bash) ],
+    "Operating systems"   => [ qw(linux windows) ],
+    "Certifications"      => [ qw(ccna cissp lpic) ],
+    "Linux scripting"     => [ ('linux perl', 'linux python', 'linux ruby', 'linux bash', 'linux shell') ],
+    "Monitoring"          => [ qw(zabbix nagios icinga) ],
+    "Databases"           => [ qw(mysql postgresql oracle) ],
+    "Web servers"         => [ qw(apache nginx lighttpd) ],
+    "Configuration mngt"  => [ qw(puppet chef salt cfengine ansible) ],
+    "DevOps"              => [ qw(devops cloud aws agile scrum) ],
+    "Other"               => [ qw(cluster bind haproxy memcache redis jenkins docker) ],
+);
+
+# Repo path...
+chdir "$ENV{HOME}/github-repos/profesia-jobs";
+
+sub stringify_terms {
+    my @all_terms;
+
+    for my $category (keys %terms) {
+        push @all_terms, @{ $terms{$category} };
+    }
+
+    my $all_terms = join " ", map { "'$_'" } @all_terms;
+
+    return $all_terms;
+}
+
+sub run {
+    my $cmd = shift;
+    print "running '$cmd' ...";
+    system($cmd);
+    print " done\n";
+}
+
+print "--> Collect data\n";
+my $terms = stringify_terms();
+my $cmd  = "./profesia-jobs --count $terms >> jobs-count.csv";
+my $cmd2 = "./profesia-jobs         $terms >> jobs.csv";
+run($cmd);
+run($cmd2);
+
 print "--> Create a CSV that can be viewed directly on GitHub\n";
 system "echo 'Date,Term,Count' > jobs-count_for-github.csv";
 system "cat jobs-count.csv | sed 's/;/,/g' >> jobs-count_for-github.csv";
 
-my %regex = (
-    "Scripting languages" => '^(python|perl|ruby|shell|bash)$',
-    "Operating systems"   => '^(linux|windows)$',
-    "Certifications"      => '^(ccna|cissp|lpic)$',
-    "Linux scripting"      => '^(linux perl|linux python|linux ruby|linux bash|linux shell)$',
-    "Monitoring"          => '^(zabbix|nagios|icinga)$',
-    "Databases"           => '^(mysql|postgresql|oracle)$',
-    "Web servers"         => '^(apache|nginx|lighttpd)$',
-    "Configuration mngt"  => '^(puppet|chef|salt|cfengine|ansible)$',
-    "DevOps"              => '^(devops|cloud|aws|agile|scrum)$',
-    "Other"               => '^(cluster|bind|haproxy|memcache|redis|jenkins|docker)$',
-);
+sub gen_regex {
+    my @terms = @_;
+    my $terms = join "|", @terms;
+    return "^($terms)\$";
+}
 
 print "--> Generate graphs\n";
-for my $title ( keys %regex ) {
-    print "generating '$title' graph ...";
-    system "./gen-graph --select '$regex{$title}' --xskip 50 --title '$title'";
-    print " done\n";
+for my $category ( keys %terms ) {
+    my $regex = gen_regex(@{ $terms{$category} });
+    my $cmd = "./gen-graph --select '$regex' --xskip 50 --title '$category'";
+    run($cmd);
 }
 
 print "--> Commit and push\n";
