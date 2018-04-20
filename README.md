@@ -9,7 +9,7 @@ terms.
 * `profesia-jobs` - search jobs at profesia.sk
 * `gen-graph` - generate graph from CSV file created via `profesia-jobs --count`
 * `update-data` - run `profesia-jobs` + `gen-graph` and commit and push new data (CSVs, graphs) to GitHub
-* `clean-data` - helper script that remove duplicate lines from CSV file
+* `clean-data` - helper script that remove duplicate lines from CSV files
 
 `gen-graph` can deal with duplicate data but you might want to clean up your
 CSVs from time to time anyways by running `clean-data`.
