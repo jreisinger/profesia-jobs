@@ -12,7 +12,7 @@ terms.
 * `clean-data` - helper script that remove duplicate lines from CSV files
 
 `gen-graph` copes with duplicate data but you might want to clean up your
-CSVs from time to time anyways by running `clean-data`.
+CSVs from time to time anyways by running `clean-data`
 
 ## Usage
 
