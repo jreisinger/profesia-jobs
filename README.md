@@ -22,7 +22,7 @@ Setup crontab job (check your directory paths):
 
 ```
 # Collect and persist data...
-45 23 * * * PERL5LIB=/home/reisinge/perl5/lib/perl5 /home/reisinge/github-repos/profesia-jobs/update-data
+15 23 * * * PERL5LIB=/home/reisinge/perl5/lib/perl5 /home/reisinge/github-repos/profesia-jobs/update-data
 ```
 
 Show Linux shops and job titles
