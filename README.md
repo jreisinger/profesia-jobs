@@ -36,4 +36,4 @@ sort | uniq | less
 Add new search term
 
 1. Modify `%terms` in `update-data` accordingly
-2. If you create new category modify `index.hmtl` in *gh-pages* branch
+2. Check `index.hmtl` in *gh-pages* branch - use `gen-index`.
