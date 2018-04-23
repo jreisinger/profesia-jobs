@@ -1,0 +1,18 @@
+#!/usr/bin/perl
+use strict;
+use warnings;
+
+use File::Basename;
+
+print "[Data](https://github.com/jreisinger/profesia-jobs/blob/master/jobs-count_for-github.csv) for the graphs.\n";
+print "\n";
+
+for my $pic (glob "*.jpg") {
+    $pic = basename $pic;
+    my $title = $pic;
+    $title =~ s/\.jpg//;
+    $title =~ s/_/ /g;
+    $title = ucfirst $title;
+    print "![$title](https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/$pic)\n";
+    print "\n";
+}
