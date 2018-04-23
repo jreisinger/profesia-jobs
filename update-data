@@ -5,16 +5,19 @@ use autodie;
 
 # Terms to search organized by categories...
 my %terms = (
-    "Scripting languages" => [ qw(python perl ruby shell bash) ],
-    "Operating systems"   => [ qw(linux windows) ],
-    "Certifications"      => [ qw(ccna cissp lpic) ],
-    "Linux scripting"     => [ ('linux perl', 'linux python', 'linux ruby', 'linux bash', 'linux shell') ],
-    "Monitoring"          => [ qw(zabbix nagios icinga) ],
-    "Databases"           => [ qw(mysql postgresql oracle) ],
-    "Web servers"         => [ qw(apache nginx lighttpd) ],
-    "Configuration mngt"  => [ qw(puppet chef salt cfengine ansible) ],
-    "DevOps"              => [ qw(devops cloud aws agile scrum) ],
-    "Other"               => [ qw(cluster bind haproxy memcache redis jenkins docker) ],
+    "Scripting languages"   => [ qw(python perl ruby shell bash) ],
+    "Programming languages" => [ qw(java javascript c c++ golang go) ],
+    "Operating systems"     => [ qw(linux windows freebsd solaris) ],
+    "Certifications"        => [ qw(ccna cissp lpic) ],
+    "Linux scripting"       => [ ('linux perl', 'linux python', 'linux ruby', 'linux bash', 'linux shell') ],
+    "Monitoring"            => [ qw(zabbix nagios icinga prometheus graphana) ],
+    "Databases"             => [ qw(mysql postgresql oracle couchdb redis mongodb) ],
+    "Web servers"           => [ qw(apache nginx lighttpd) ],
+    "Configuration mngt"    => [ qw(puppet chef salt cfengine ansible) ],
+    "DevOps"                => [ qw(devops cloud aws gcp agile scrum sre) ],
+    "Containers"            => [ qw(docker rkt coreos systemd-nspawn lxc kubernetes swarm mesos marathon) ],
+    "Big data"              => [ qw(splunk graylog elasticsearch elk) ],
+    "Other"                 => [ qw(bind haproxy memcache jenkins gitlab) ],
 );
 
 # Repo path...
