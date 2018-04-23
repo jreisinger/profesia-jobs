@@ -16,4 +16,6 @@
 
 ![Configuration mngt](https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/configuration_mngt.jpg)
 
+![DevOps](https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/devops.jpg)
+
 ![Other](https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/other.jpg)
