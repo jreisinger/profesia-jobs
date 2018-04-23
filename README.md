@@ -18,14 +18,11 @@ CSVs from time to time anyways by running `clean-data`
 
 See `.travis.yml` for installation hints.
 
-Setup crontab job
+Setup crontab job (check your directory paths):
 
 ```
-PERL5LIB="$HOME/perl5/lib/perl5"
-PJ_DIR="$HOME/github-repos/profesia-jobs"
-
 # Collect and persist data...
-45 23 * * * PERL5LIB=$PERL5LIB $PJ_DIR/update-data
+45 23 * * * PERL5LIB=/home/reisinge/perl5/lib/perl5 /home/reisinge/github-repos/profesia-jobs/update-data
 ```
 
 Show Linux shops and job titles
