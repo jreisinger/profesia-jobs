@@ -6,7 +6,7 @@ use autodie;
 # Terms to search organized by categories...
 my %terms = (
     "Scripting languages"   => [ qw(python perl ruby shell bash) ],
-    "Programming languages" => [ qw(java javascript c c++ golang go) ],
+    "Programming languages" => [ qw(java javascript c++ golang go) ],
     "Operating systems"     => [ qw(linux windows freebsd solaris) ],
     "Certifications"        => [ qw(ccna cissp lpic) ],
     "Linux scripting"       => [ ('linux perl', 'linux python', 'linux ruby', 'linux bash', 'linux shell') ],
