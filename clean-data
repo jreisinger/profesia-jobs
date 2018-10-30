@@ -1,9 +1,15 @@
 #!/bin/bash
 
+# Create a temporary directory ...
+TMPDIR=$(mktemp -d)
+# Make sure it gets removed even if the script exits abnormally ...
+trap "exit 1"         HUP INT PIPE QUIT TERM
+trap "rm -rf $TMPDIR" EXIT
+
 for f in *.csv; do
     echo -n working on $f ... 
-    cp $f /tmp
+    cp $f $TMPDIR
     # remove duplicate lines but keep order
-    perl -ne 'print if ++$k{$_}==1' /tmp/$f > $f
+    perl -ne 'print if ++$k{$_}==1' $TMPDIR/$f > $f
     echo ' done'
 done
