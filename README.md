@@ -45,7 +45,7 @@ Show *current* Linux shops and job titles:
 
 ```
 ./profesia-jobs linux | \
-perl -F';' -lane 'print "$F[0] ($F[3]): $F[4]" if $F[1] eq "linux"' | \
+perl -F';' -lane 'print "$F[0] ($F[3]): $F[4]"' | \
 sort | uniq | less
 ```
 
