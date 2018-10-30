@@ -14,7 +14,7 @@ terms.
 `gen-graph` copes with duplicate data but you might want to clean up your
 CSVs from time to time anyways by running `clean-data`
 
-## Usage
+## Installation
 
 See `.travis.yml` for installation hints.
 
@@ -29,15 +29,19 @@ Setup crontab job (check your directory paths):
 15 23 * * * PERL5LIB=/home/reisinge/perl5/lib/perl5 /home/reisinge/github-repos/profesia-jobs/update-data
 ```
 
-Show Linux shops and job titles
+## Usage
+
+See [Graphs](http://jreisinger.github.io/profesia-jobs/).
+
+Show Linux shops and job titles:
 
 ```
-wget https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/jobs.csv -O - | \
+cat https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/jobs.csv | \
 perl -F';' -alne 'print "$F[1] ($F[3]): $F[4]" if $F[1] eq "linux"' | \
 sort | uniq | less
 ```
 
-Add new search term
+## Add new search term
 
 1. Modify `%terms` in `update-data` accordingly
 2. Check `index.hmtl` in *gh-pages* branch - use `gen-index`.
