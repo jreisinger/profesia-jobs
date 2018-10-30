@@ -33,11 +33,19 @@ Setup crontab job (check your directory paths):
 
 See [Graphs](http://jreisinger.github.io/profesia-jobs/).
 
-Show Linux shops and job titles:
+Show *historical* Linux shops and job titles:
 
 ```
 cat jobs.csv | \
-perl -F';' -lane 'print "$F[1] ($F[3]): $F[4]" if $F[1] eq "linux"' | \
+perl -F';' -lane 'print "$F[0] ($F[3]): $F[4]" if $F[1] eq "linux"' | \
+sort | uniq | less
+```
+
+Show *current* Linux shops and job titles:
+
+```
+./profesia-jobs linux | \
+perl -F';' -lane 'print "$F[0] ($F[3]): $F[4]" if $F[1] eq "linux"' | \
 sort | uniq | less
 ```
 
