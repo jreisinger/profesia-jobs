@@ -36,8 +36,8 @@ See [Graphs](http://jreisinger.github.io/profesia-jobs/).
 Show Linux shops and job titles:
 
 ```
-cat https://raw.githubusercontent.com/jreisinger/profesia-jobs/master/jobs.csv | \
-perl -F';' -alne 'print "$F[1] ($F[3]): $F[4]" if $F[1] eq "linux"' | \
+cat jobs.csv | \
+perl -F';' -lane 'print "$F[1] ($F[3]): $F[4]" if $F[1] eq "linux"' | \
 sort | uniq | less
 ```
 
