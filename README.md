@@ -18,6 +18,10 @@ CSVs from time to time anyways by running `clean-data`
 
 See `.travis.yml` for installation hints.
 
+Use git lfs for storing large files
+
+https://git-lfs.github.com/
+
 Setup crontab job (check your directory paths):
 
 ```
