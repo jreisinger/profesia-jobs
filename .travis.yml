@@ -12,7 +12,7 @@ perl:
 before_install:
     - sudo apt-get update -qq
     - sudo apt-get install -y libgd-graph-perl libgd2-xpm-dev gcc
-    #- sudo pacman -S perl-gd perl-gdgraph
+    #- sudo pacman -S perl-gd perl-gdgraph git-lfs
 install:
     - cpanm --quiet --notest Mojo::UserAgent local::lib LWP::Simple GD::Graph::lines Text::CSV IO::Socket::SSL LWP::Protocol::https
 script: prove -lvr
