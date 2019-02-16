@@ -21,6 +21,8 @@ See `.travis.yml` for installation hints.
 Use git lfs for storing large files:
 
 * https://git-lfs.github.com/
+* https://help.github.com/articles/resolving-git-large-file-storage-upload-failures/
+* https://stackoverflow.com/questions/33330771/git-lfs-this-exceeds-githubs-file-size-limit-of-100-00-mb
 
 Setup crontab job (check your directory paths):
 
