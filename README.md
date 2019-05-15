@@ -1,3 +1,7 @@
+**NOTE**: this project has been made obsolete by https://github.com/jreisinger/tech-terms
+
+---
+
 [![Build Status](https://travis-ci.org/jreisinger/profesia-jobs.svg?branch=master)](https://travis-ci.org/jreisinger/profesia-jobs)
 
 ## About
